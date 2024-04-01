@@ -36,4 +36,8 @@ public class LottoBalls {
     private int removedDuplicatedSize(final List<Integer> numbers) {
         return new HashSet<>(numbers).size();
     }
+
+    public boolean containsBall(final LottoBall ball) {
+        return balls.contains(ball);
+    }
 }
