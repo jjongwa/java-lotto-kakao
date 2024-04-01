@@ -4,6 +4,7 @@ import org.junit.jupiter.api.Test;
 
 import java.util.List;
 
+import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
 
@@ -30,5 +31,25 @@ class WinningGroupTest {
         assertThatThrownBy(() -> new WinningGroup(lottoBalls, bonusBall))
                 .isInstanceOf(IllegalArgumentException.class)
                 .hasMessage("로또 그룹에 속한 볼과 보너스 볼은 중복될 수 없습니다.");
+    }
+
+    @Test
+    void 로또_그룹과_비교해_결과를_반환할_수_있다_2등() {
+        // given
+        final WinningGroup winningGroup = new WinningGroup(new LottoBalls(List.of(1, 2, 3, 4, 5, 6)), new LottoBall(7));
+        final LottoBalls lottoBalls = new LottoBalls(List.of(1, 2, 3, 4, 5, 7));
+
+        // when
+        assertThat(winningGroup.calculateRoundResult(lottoBalls)).isEqualTo(LottoRoundResult.SECOND);
+    }
+
+    @Test
+    void 로또_그룹과_비교해_결과를_반환할_수_있다_1등() {
+        // given
+        final WinningGroup winningGroup = new WinningGroup(new LottoBalls(List.of(1, 2, 3, 4, 5, 6)), new LottoBall(7));
+        final LottoBalls lottoBalls = new LottoBalls(List.of(1, 2, 3, 4, 5, 6));
+
+        // when
+        assertThat(winningGroup.calculateRoundResult(lottoBalls)).isEqualTo(LottoRoundResult.FIRST);
     }
 }
