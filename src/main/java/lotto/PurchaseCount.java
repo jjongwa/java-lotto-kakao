@@ -20,6 +20,10 @@ public class PurchaseCount {
         }
     }
 
+    public int getCount() {
+        return count;
+    }
+
     @Override
     public boolean equals(final Object o) {
         if (this == o) return true;

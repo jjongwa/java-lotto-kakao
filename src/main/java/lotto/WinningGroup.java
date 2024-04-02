@@ -5,25 +5,25 @@ public class WinningGroup {
     private static final String DUPLICATED_BONUS_BALL_MESSAGE = "로또 그룹에 속한 볼과 보너스 볼은 중복될 수 없습니다.";
     private static final int ONE = 1;
 
-    private final LottoBalls lottoBalls;
+    private final LottoGroup lottoGroup;
     private final LottoBall bonusBall;
 
 
-    public WinningGroup(final LottoBalls lottoBalls, final LottoBall bonusBall) {
-        validateDuplicate(lottoBalls, bonusBall);
-        this.lottoBalls = lottoBalls;
+    public WinningGroup(final LottoGroup lottoGroup, final LottoBall bonusBall) {
+        validateDuplicate(lottoGroup, bonusBall);
+        this.lottoGroup = lottoGroup;
         this.bonusBall = bonusBall;
     }
 
-    private void validateDuplicate(final LottoBalls lottoBalls, final LottoBall bonusBall) {
-        if (lottoBalls.containsBall(bonusBall)) {
+    private void validateDuplicate(final LottoGroup lottoGroup, final LottoBall bonusBall) {
+        if (lottoGroup.containsBall(bonusBall)) {
             throw new IllegalArgumentException(DUPLICATED_BONUS_BALL_MESSAGE);
         }
     }
 
-    public LottoRoundResult calculateRoundResult(final LottoBalls otherLottoBalls) {
-        final int matchCount = otherLottoBalls.countMatch(lottoBalls);
-        final boolean bonusMatch = otherLottoBalls.containsBall(bonusBall);
+    public LottoRoundResult calculateRoundResult(final LottoGroup otherLottoGroup) {
+        final int matchCount = otherLottoGroup.countMatch(lottoGroup);
+        final boolean bonusMatch = otherLottoGroup.containsBall(bonusBall);
         return LottoRoundResult.makeRoundResult(totalMatchCount(matchCount, bonusMatch), bonusMatch);
     }
 

@@ -4,7 +4,7 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.stream.Collectors;
 
-public class LottoBalls {
+public class LottoGroup {
 
     private static final int BALLS_SIZE = 6;
     private static final String INVALID_BALLS_SIZE_MESSAGE = "로또 볼은 6개가 존재해야 합니다.";
@@ -13,7 +13,7 @@ public class LottoBalls {
 
     private final List<LottoBall> balls;
 
-    public LottoBalls(final List<Integer> numbers) {
+    public LottoGroup(final List<Integer> numbers) {
         validateNumbersSize(numbers);
         validateDuplicateBalls(numbers);
 
@@ -42,7 +42,7 @@ public class LottoBalls {
         return balls.contains(ball);
     }
 
-    public int countMatch(final LottoBalls otherBalls) {
+    public int countMatch(final LottoGroup otherBalls) {
         return this.balls.stream()
                 .filter(otherBalls::containsBall)
                 .mapToInt(match -> ONE)
