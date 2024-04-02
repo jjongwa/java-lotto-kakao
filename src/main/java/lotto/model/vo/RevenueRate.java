@@ -21,6 +21,10 @@ public class RevenueRate {
         }
     }
 
+    public double getValue() {
+        return value;
+    }
+
     @Override
     public boolean equals(final Object o) {
         if (this == o) return true;

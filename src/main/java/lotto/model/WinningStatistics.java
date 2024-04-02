@@ -55,4 +55,8 @@ public class WinningStatistics {
                         .mapToInt(Integer::intValue)
                         .sum() * LOTTO_PRICE);
     }
+
+    public Map<LottoRoundResult, Integer> getStatistics() {
+        return statistics;
+    }
 }

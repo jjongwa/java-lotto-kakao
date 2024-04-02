@@ -21,6 +21,10 @@ public class LottoBall {
         }
     }
 
+    public int getNumber() {
+        return number;
+    }
+
     @Override
     public boolean equals(final Object o) {
         if (this == o) return true;

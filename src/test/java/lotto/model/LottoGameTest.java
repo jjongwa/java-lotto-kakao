@@ -1,6 +1,5 @@
 package lotto.model;
 
-import lotto.model.vo.LottoBall;
 import lotto.model.vo.PurchaseCount;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
@@ -32,7 +31,7 @@ class LottoGameTest {
                 new PurchaseCount(2),
                 new CustomLottoMachine(List.of(1, 2, 3, 4, 5, 6), List.of(7, 8, 9, 10, 11, 12))
         );
-        final WinningGroup winningGroup = new WinningGroup(new LottoGroup(List.of(1, 2, 3, 4, 5, 6)), new LottoBall(7));
+        final WinningGroup winningGroup = new WinningGroup("1, 2, 3, 4, 5, 6", 7);
         final WinningStatistics expectedStatistics = new WinningStatistics(List.of(FIRST, BOOM));
 
         // when

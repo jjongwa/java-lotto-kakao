@@ -50,4 +50,10 @@ public class LottoGroup {
                 .mapToInt(match -> ONE)
                 .sum();
     }
+
+    public List<Integer> getLottoBallNumbers() {
+        return balls.stream()
+                .map(LottoBall::getNumber)
+                .collect(Collectors.toUnmodifiableList());
+    }
 }

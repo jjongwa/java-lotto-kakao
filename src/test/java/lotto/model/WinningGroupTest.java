@@ -1,7 +1,7 @@
 package lotto.model;
 
-import lotto.model.vo.LottoBall;
-import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.CsvSource;
 
 import java.util.List;
 
@@ -12,45 +12,35 @@ import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
 @SuppressWarnings("NonAsciiCharacters")
 class WinningGroupTest {
 
-    @Test
-    void 올바르게_당첨_번호를_생성할_수_있다() {
-        // given
-        final LottoGroup lottoGroup = new LottoGroup(List.of(1, 7, 15, 23, 35, 45));
-        final LottoBall bonusBall = new LottoBall(27);
-
-        // when & then
-        assertDoesNotThrow(() -> new WinningGroup(lottoGroup, bonusBall));
+    @ParameterizedTest
+    @CsvSource(delimiter = ':', value = {"1, 2, 3, 4, 5, 6 : 7", "1, 7, 15, 23, 35, 45 : 27", "1, 7, 15, 23, 25, 34 : 45"})
+    void 올바르게_당첨_번호를_생성할_수_있다(final String winningNumbers, final int bonusNumber) {
+        assertDoesNotThrow(() -> new WinningGroup(winningNumbers, bonusNumber));
     }
 
-    @Test
-    void 로또_그룹에_속한_볼과_보너스_볼이_중복되면_예외_처리한다() {
-        // given
-        final LottoGroup lottoGroup = new LottoGroup(List.of(1, 2, 3, 4, 5, 6));
-        final LottoBall bonusBall = new LottoBall(1);
-
-        // when & then
-        assertThatThrownBy(() -> new WinningGroup(lottoGroup, bonusBall))
+    @ParameterizedTest
+    @CsvSource(delimiter = ':', value = {"1, 2, 3, 4, 5, 6 : 6", "1, 7, 15, 23, 35, 45 : 1", "1, 7, 15, 23, 25, 34 : 15"})
+    void 로또_그룹에_속한_볼과_보너스_볼이_중복되면_예외_처리한다(final String winningNumbers, final int bonusNumber) {
+        assertThatThrownBy(() -> new WinningGroup(winningNumbers, bonusNumber))
                 .isInstanceOf(IllegalArgumentException.class)
                 .hasMessage("로또 그룹에 속한 볼과 보너스 볼은 중복될 수 없습니다.");
     }
 
-    @Test
-    void 로또_그룹과_비교해_결과를_반환할_수_있다_2등() {
+    @ParameterizedTest
+    @CsvSource(delimiter = ':', value = {
+            "1, 2, 3, 4, 5, 6 : 7 : FIRST",
+            "1, 2, 3, 4, 5, 45 : 6 : SECOND",
+            "1, 2, 3, 4, 5, 44 : 45 : THIRD",
+            "1, 2, 3, 4, 43, 44 : 45 : FOURTH",
+            "1, 2, 3, 42, 43, 44 : 45 : FIFTH",
+            "1, 2, 41, 42, 43, 44 : 45 : BOOM"
+    })
+    void 로또_그룹과_비교해_결과를_반환할_수_있다(final String winningNumbers, final int bonusNumber, final LottoRoundResult lottoRoundResult) {
         // given
-        final WinningGroup winningGroup = new WinningGroup(new LottoGroup(List.of(1, 2, 3, 4, 5, 6)), new LottoBall(7));
-        final LottoGroup lottoGroup = new LottoGroup(List.of(1, 2, 3, 4, 5, 7));
-
-        // when
-        assertThat(winningGroup.calculateRoundResult(lottoGroup)).isEqualTo(LottoRoundResult.SECOND);
-    }
-
-    @Test
-    void 로또_그룹과_비교해_결과를_반환할_수_있다_1등() {
-        // given
-        final WinningGroup winningGroup = new WinningGroup(new LottoGroup(List.of(1, 2, 3, 4, 5, 6)), new LottoBall(7));
+        final WinningGroup winningGroup = new WinningGroup(winningNumbers, bonusNumber);
         final LottoGroup lottoGroup = new LottoGroup(List.of(1, 2, 3, 4, 5, 6));
 
         // when
-        assertThat(winningGroup.calculateRoundResult(lottoGroup)).isEqualTo(LottoRoundResult.FIRST);
+        assertThat(winningGroup.calculateRoundResult(lottoGroup)).isEqualTo(lottoRoundResult);
     }
 }
