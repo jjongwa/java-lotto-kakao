@@ -17,4 +17,11 @@ public class LottoGame {
     public List<LottoGroup> getLottoGroups() {
         return lottoGroups;
     }
+
+    public WinningStatistics makeResult(final WinningGroup winningGroup) {
+        return new WinningStatistics(lottoGroups.stream()
+                .map(winningGroup::calculateRoundResult)
+                .collect(Collectors.toUnmodifiableList())
+        );
+    }
 }
