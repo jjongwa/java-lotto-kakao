@@ -1,5 +1,6 @@
 package lotto;
 
+import java.math.BigDecimal;
 import java.util.Objects;
 
 public class PurchaseMoney {
@@ -22,6 +23,10 @@ public class PurchaseMoney {
         if (amount <= ZERO) {
             throw new IllegalArgumentException(INVALID_AMOUNT_MESSAGE);
         }
+    }
+
+    public BigDecimal toBigDecimal() {
+        return new BigDecimal(amount);
     }
 
     @Override
