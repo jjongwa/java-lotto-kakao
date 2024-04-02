@@ -1,6 +1,5 @@
 package lotto.model;
 
-import lotto.model.LottoGroup;
 import org.junit.jupiter.api.Test;
 
 import java.util.List;

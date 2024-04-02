@@ -1,6 +1,5 @@
 package lotto.model.vo;
 
-import lotto.model.vo.RevenueRate;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
 import org.junit.jupiter.params.provider.ValueSource;
@@ -11,7 +10,7 @@ import static org.assertj.core.api.Assertions.assertThatThrownBy;
 @SuppressWarnings("NonAsciiCharacters")
 class RevenueRateTest {
 
-    @ParameterizedTest
+    @ParameterizedTest(name = "{0}을 입력받았을 때, 수익률은 {1}이다.")
     @CsvSource(value = {"1.6666, 1.67", "1.111111, 1.11", "123.123, 123.12", "9.999, 10"})
     void 수익률은_소수점_둘쨰_자리까지_가진다(final double actualRate, final double expectedRate) {
         // given
@@ -22,7 +21,7 @@ class RevenueRateTest {
         assertThat(actualRevenue).isEqualTo(expectedRevenue);
     }
 
-    @ParameterizedTest
+    @ParameterizedTest(name = "수익률이 {0}일 경우")
     @ValueSource(doubles = {-0.01, -1.555, -10, -3.3333})
     void 수익률은_음수가_될_수_없다(final double value) {
         assertThatThrownBy(() -> new RevenueRate(value))

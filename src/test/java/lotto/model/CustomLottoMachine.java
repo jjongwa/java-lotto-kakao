@@ -1,8 +1,5 @@
 package lotto.model;
 
-import lotto.model.LottoGroup;
-import lotto.model.LottoMachine;
-
 import java.util.Arrays;
 import java.util.LinkedList;
 import java.util.List;
