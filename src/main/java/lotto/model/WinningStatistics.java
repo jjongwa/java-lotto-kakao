@@ -1,4 +1,7 @@
-package lotto;
+package lotto.model;
+
+import lotto.model.vo.PurchaseMoney;
+import lotto.model.vo.RevenueRate;
 
 import java.math.BigDecimal;
 import java.math.RoundingMode;

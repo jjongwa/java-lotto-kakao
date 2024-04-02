@@ -1,14 +1,15 @@
-package lotto;
+package lotto.model;
 
+import lotto.model.vo.LottoBall;
+import lotto.model.vo.PurchaseCount;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
 
 import java.util.List;
 
-import static lotto.LottoRoundResult.BOOM;
-import static lotto.LottoRoundResult.FIRST;
-import static org.assertj.core.api.Assertions.*;
+import static lotto.model.LottoRoundResult.BOOM;
+import static lotto.model.LottoRoundResult.FIRST;
 import static org.assertj.core.api.Assertions.assertThat;
 
 @SuppressWarnings("NonAsciiCharacters")

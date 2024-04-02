@@ -1,4 +1,6 @@
-package lotto;
+package lotto.model;
+
+import lotto.model.vo.PurchaseCount;
 
 import java.util.List;
 import java.util.stream.Collectors;

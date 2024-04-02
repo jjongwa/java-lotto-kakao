@@ -1,4 +1,4 @@
-package lotto;
+package lotto.model.vo;
 
 import java.math.BigDecimal;
 import java.util.Objects;
@@ -23,6 +23,10 @@ public class PurchaseMoney {
         if (amount <= ZERO) {
             throw new IllegalArgumentException(INVALID_AMOUNT_MESSAGE);
         }
+    }
+
+    public PurchaseCount toCount() {
+        return new PurchaseCount(this.amount / 1000);
     }
 
     public BigDecimal toBigDecimal() {

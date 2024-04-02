@@ -1,4 +1,4 @@
-package lotto;
+package lotto.model.vo;
 
 import java.math.BigInteger;
 import java.util.Objects;

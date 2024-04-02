@@ -1,11 +1,12 @@
-package lotto;
+package lotto.model;
 
+import lotto.model.vo.RevenueRate;
 import org.junit.jupiter.api.Test;
 
 import java.util.List;
 
-import static lotto.LottoRoundResult.BOOM;
-import static lotto.LottoRoundResult.FIFTH;
+import static lotto.model.LottoRoundResult.BOOM;
+import static lotto.model.LottoRoundResult.FIFTH;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
