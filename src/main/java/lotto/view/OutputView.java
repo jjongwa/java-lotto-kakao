@@ -32,7 +32,7 @@ public class OutputView {
     }
 
     public static void printLottoGroups(final LottoGroupDTOs lottoGroupDtos) {
-        lottoGroupDtos.getDtos()
+        lottoGroupDtos.getValues()
                 .forEach(lottoGroupDto -> System.out.println(String.join(JOIN_DELIMITER, lottoGroupDto.getNumbers().toString())));
         System.out.println();
     }

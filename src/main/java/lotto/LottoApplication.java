@@ -22,7 +22,7 @@ public class LottoApplication {
 
     private static PurchaseCount makePurchaseCount() {
         final int purchaseMoneyInput = InputView.readPurchaseMoney();
-        final PurchaseCount purchaseCount = new PurchaseMoney(purchaseMoneyInput).toCount();
+        final PurchaseCount purchaseCount = new PurchaseMoney(purchaseMoneyInput).toPurchaseCount();
         OutputView.printPurchaseCount(purchaseCount.getCount());
         return purchaseCount;
     }

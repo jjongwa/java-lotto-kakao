@@ -25,8 +25,8 @@ public class PurchaseMoney {
         }
     }
 
-    public PurchaseCount toCount() {
-        return new PurchaseCount(this.amount / 1000);
+    public PurchaseCount toPurchaseCount() {
+        return new PurchaseCount(this.amount / SINGLE_LOTTO_COST);
     }
 
     public BigDecimal toBigDecimal() {

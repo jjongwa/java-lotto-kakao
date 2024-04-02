@@ -10,7 +10,7 @@ public class RandomLottoMachine implements LottoMachine{
     private static final int MIN_LOTTO_NUM = 1;
     private static final int MAX_LOTTO_NUM = 45;
     private static final int ZERO = 0;
-    public static final int LOTTO_BALLS_COUNT = 6;
+    private static final int LOTTO_BALLS_COUNT = 6;
 
     private final List<Integer> lottoNumbers = IntStream.rangeClosed(MIN_LOTTO_NUM, MAX_LOTTO_NUM)
             .boxed()

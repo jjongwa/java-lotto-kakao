@@ -14,11 +14,12 @@ public class InputView {
 
     public static int readPurchaseMoney() {
         System.out.println(INPUT_PURCHASE_MONEY_MESSAGE);
-        return SCANNER.nextInt();
+        final int moneyInput = SCANNER.nextInt();
+        SCANNER.nextLine();
+        return moneyInput;
     }
 
     public static String readWinningGroup() {
-        SCANNER.nextLine();
         System.out.println(INPUT_WINNER_NUMBER_MESSAGE);
         return SCANNER.nextLine();
     }

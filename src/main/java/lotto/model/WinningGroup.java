@@ -9,6 +9,7 @@ public class WinningGroup {
 
     private static final String DUPLICATED_BONUS_BALL_MESSAGE = "로또 그룹에 속한 볼과 보너스 볼은 중복될 수 없습니다.";
     private static final int ONE = 1;
+    private static final String SPLIT_REGEX = ", ";
 
     private final LottoGroup lottoGroup;
     private final LottoBall bonusBall;
@@ -21,7 +22,7 @@ public class WinningGroup {
     }
 
     public WinningGroup(final String winningNumbers, final int bonusNumber) {
-        this(new LottoGroup(Arrays.stream(winningNumbers.split(", "))
+        this(new LottoGroup(Arrays.stream(winningNumbers.split(SPLIT_REGEX))
                         .map(Integer::parseInt)
                         .collect(Collectors.toUnmodifiableList())),
                 new LottoBall(bonusNumber));

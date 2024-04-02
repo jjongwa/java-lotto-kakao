@@ -7,15 +7,15 @@ import java.util.stream.Collectors;
 
 public class LottoGroupDTOs {
 
-    private final List<LottoGroupDTO> dtos;
+    private final List<LottoGroupDTO> values;
 
     public LottoGroupDTOs(final List<LottoGroup> lottoGroups) {
-        this.dtos = lottoGroups.stream()
+        this.values = lottoGroups.stream()
                 .map(LottoGroupDTO::new)
                 .collect(Collectors.toUnmodifiableList());
     }
 
-    public List<LottoGroupDTO> getDtos() {
-        return dtos;
+    public List<LottoGroupDTO> getValues() {
+        return values;
     }
 }
