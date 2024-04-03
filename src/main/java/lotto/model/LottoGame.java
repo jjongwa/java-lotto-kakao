@@ -8,7 +8,7 @@ import java.util.stream.Stream;
 
 public class LottoGame {
 
-    final List<LottoGroup> lottoGroups;
+    private final List<LottoGroup> lottoGroups;
 
     public LottoGame(final PurchaseCount purchaseCount, final LottoMachine lottoMachine) {
         this.lottoGroups = Stream.generate(lottoMachine::generate)
