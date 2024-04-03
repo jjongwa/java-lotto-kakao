@@ -3,7 +3,6 @@ package lotto.model;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
-import org.junit.jupiter.params.provider.ValueSource;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -16,27 +15,24 @@ class LottoRoundResultTest {
         assertThat(LottoRoundResult.makeRoundResult(count, bonusMatch)).isEqualTo(LottoRoundResult.BOOM);
     }
 
-    @ParameterizedTest(name = "bounsMatch가 {0}일 때")
-    @ValueSource(booleans = {true, false})
-    void 번호가_3개_일치하면면_5등을_반환한다(final boolean bonusMatch) {
-        assertThat(LottoRoundResult.makeRoundResult(3, bonusMatch)).isEqualTo(LottoRoundResult.FIFTH);
+    @Test
+    void 번호가_3개_일치하면면_5등을_반환한다() {
+        assertThat(LottoRoundResult.makeRoundResult(3, false)).isEqualTo(LottoRoundResult.FIFTH);
     }
 
-    @ParameterizedTest(name = "bounsMatch가 {0}일 때")
-    @ValueSource(booleans = {true, false})
-    void 번호가_4개_일치하면_4등을_반환한다(final boolean bonusMatch) {
-        assertThat(LottoRoundResult.makeRoundResult(4, bonusMatch)).isEqualTo(LottoRoundResult.FOURTH);
+    @Test
+    void 번호가_4개_일치하면_4등을_반환한다() {
+        assertThat(LottoRoundResult.makeRoundResult(4, false)).isEqualTo(LottoRoundResult.FOURTH);
     }
 
-    @ParameterizedTest(name = "bounsMatch가 {0}일 때")
-    @ValueSource(booleans = {true, false})
-    void 번호가_5개_일치하면_3등을_반환한다(final boolean bonusMatch) {
-        assertThat(LottoRoundResult.makeRoundResult(5, bonusMatch)).isEqualTo(LottoRoundResult.THIRD);
+    @Test
+    void 번호가_5개_일치하면_3등을_반환한다() {
+        assertThat(LottoRoundResult.makeRoundResult(5, false)).isEqualTo(LottoRoundResult.THIRD);
     }
 
     @Test
     void 번호가_6개_일치하고_일치한_번호들_중_하나가_보너스_번호이면_2등을_반환한다() {
-        assertThat(LottoRoundResult.makeRoundResult(6, true)).isEqualTo(LottoRoundResult.SECOND);
+        assertThat(LottoRoundResult.makeRoundResult(5, true)).isEqualTo(LottoRoundResult.SECOND);
     }
 
     @Test
