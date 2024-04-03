@@ -1,5 +1,6 @@
 package lotto.model;
 
+import lotto.model.vo.LottoBall;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
 
@@ -38,7 +39,14 @@ class WinningGroupTest {
     void 로또_그룹과_비교해_결과를_반환할_수_있다(final String winningNumbers, final int bonusNumber, final LottoRoundResult lottoRoundResult) {
         // given
         final WinningGroup winningGroup = new WinningGroup(winningNumbers, bonusNumber);
-        final LottoGroup lottoGroup = new LottoGroup(List.of(1, 2, 3, 4, 5, 6));
+        final LottoGroup lottoGroup = new LottoGroup(List.of(
+                new LottoBall(1),
+                new LottoBall(2),
+                new LottoBall(3),
+                new LottoBall(4),
+                new LottoBall(5),
+                new LottoBall(6))
+        );
 
         // when
         assertThat(winningGroup.compareAndMakeResult(lottoGroup)).isEqualTo(lottoRoundResult);

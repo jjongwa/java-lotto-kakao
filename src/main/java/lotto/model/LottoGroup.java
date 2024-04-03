@@ -15,29 +15,28 @@ public class LottoGroup {
 
     private final List<LottoBall> balls;
 
-    public LottoGroup(final List<Integer> numbers) {
-        validateNumbersSize(numbers);
-        validateDuplicateBalls(numbers);
+    public LottoGroup(final List<LottoBall> balls) {
+        validateNumbersSize(balls);
+        validateDuplicateBalls(balls);
 
-        this.balls = numbers.stream()
-                .map(LottoBall::new)
+        this.balls = balls.stream()
                 .collect(Collectors.toUnmodifiableList());
     }
 
-    private void validateNumbersSize(final List<Integer> numbers) {
-        if (numbers.size() != BALLS_SIZE) {
+    private void validateNumbersSize(final List<LottoBall> balls) {
+        if (balls.size() != BALLS_SIZE) {
             throw new IllegalArgumentException(INVALID_BALLS_SIZE_MESSAGE);
         }
     }
 
-    private void validateDuplicateBalls(final List<Integer> numbers) {
-        if (removedDuplicatedSize(numbers) != numbers.size()) {
+    private void validateDuplicateBalls(final List<LottoBall> balls) {
+        if (removedDuplicatedSize(balls) != balls.size()) {
             throw new IllegalArgumentException(DUPLICATED_BALLS_MESSAGE);
         }
     }
 
-    private int removedDuplicatedSize(final List<Integer> numbers) {
-        return new HashSet<>(numbers).size();
+    private int removedDuplicatedSize(final List<LottoBall> balls) {
+        return new HashSet<>(balls).size();
     }
 
     public boolean containsBall(final LottoBall ball) {

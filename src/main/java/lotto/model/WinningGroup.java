@@ -22,7 +22,7 @@ public class WinningGroup {
 
     public WinningGroup(final String winningNumbers, final int bonusNumber) {
         this(new LottoGroup(Arrays.stream(winningNumbers.split(SPLIT_REGEX))
-                        .map(Integer::parseInt)
+                        .map(number -> new LottoBall(Integer.parseInt(number)))
                         .collect(Collectors.toUnmodifiableList())),
                 new LottoBall(bonusNumber));
     }
