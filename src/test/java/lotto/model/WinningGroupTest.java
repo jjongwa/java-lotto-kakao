@@ -41,6 +41,6 @@ class WinningGroupTest {
         final LottoGroup lottoGroup = new LottoGroup(List.of(1, 2, 3, 4, 5, 6));
 
         // when
-        assertThat(winningGroup.calculateRoundResult(lottoGroup)).isEqualTo(lottoRoundResult);
+        assertThat(winningGroup.compareAndMakeResult(lottoGroup)).isEqualTo(lottoRoundResult);
     }
 }

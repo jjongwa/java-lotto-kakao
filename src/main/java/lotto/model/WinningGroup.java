@@ -33,7 +33,7 @@ public class WinningGroup {
         }
     }
 
-    public LottoRoundResult calculateRoundResult(final LottoGroup otherLottoGroup) {
+    public LottoRoundResult compareAndMakeResult(final LottoGroup otherLottoGroup) {
         final int matchCount = otherLottoGroup.countMatch(lottoGroup);
         final boolean bonusMatch = otherLottoGroup.containsBall(bonusBall);
         return LottoRoundResult.makeRoundResult(matchCount, bonusMatch);

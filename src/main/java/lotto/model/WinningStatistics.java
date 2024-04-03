@@ -32,7 +32,7 @@ public class WinningStatistics {
 
     private Map<LottoRoundResult, Integer> generateStatistics(final List<LottoRoundResult> lottoRoundResults) {
         final EnumMap<LottoRoundResult, Integer> newStatistics = new EnumMap<>(LottoRoundResult.class);
-        for (LottoRoundResult result : LottoRoundResult.values()) {
+        for (final LottoRoundResult result : LottoRoundResult.values()) {
             newStatistics.put(result, ZERO);
         }
         lottoRoundResults.forEach(lottoRoundResult ->

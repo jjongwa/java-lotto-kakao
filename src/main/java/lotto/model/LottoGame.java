@@ -22,7 +22,7 @@ public class LottoGame {
 
     public WinningStatistics makeResult(final WinningGroup winningGroup) {
         return new WinningStatistics(lottoGroups.stream()
-                .map(winningGroup::calculateRoundResult)
+                .map(winningGroup::compareAndMakeResult)
                 .collect(Collectors.toUnmodifiableList())
         );
     }
