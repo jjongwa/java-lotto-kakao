@@ -1,7 +1,5 @@
 package lotto;
 
-import lotto.dto.GameResultDTO;
-import lotto.dto.LottoGroupDTOs;
 import lotto.model.LottoGame;
 import lotto.model.RandomLottoMachine;
 import lotto.model.WinningGroup;
@@ -18,12 +16,12 @@ public class LottoApplication {
         OutputView.printPurchaseCount(purchaseCount.getCount());
 
         final LottoGame lottoGame = new LottoGame(purchaseCount, new RandomLottoMachine());
-        OutputView.printLottoGroups(new LottoGroupDTOs(lottoGame.getLottoGroups()));
+        OutputView.printLottoGroups2(lottoGame.getLottoGroups());
 
         final WinningGroup winningGroup = makeWinningGroup();
 
-        final GameResultDTO gameResultDTO = executeResult(lottoGame, winningGroup);
-        OutputView.printGameResult(gameResultDTO);
+        final WinningStatistics winningStatistics = lottoGame.makeResult(winningGroup);
+        OutputView.printGameResult2(winningStatistics, winningStatistics.calculateRevenueRate());
     }
 
     private static PurchaseCount makePurchaseCount() {
@@ -35,10 +33,5 @@ public class LottoApplication {
         final String winningGroupInput = InputView.readWinningGroup();
         final int bonusBallInput = InputView.readBonusBall();
         return new WinningGroup(winningGroupInput, bonusBallInput);
-    }
-
-    private static GameResultDTO executeResult(final LottoGame lottoGame, final WinningGroup winningGroup) {
-        final WinningStatistics winningStatistics = lottoGame.makeResult(winningGroup);
-        return new GameResultDTO(winningStatistics.getStatistics(), winningStatistics.calculateRevenueRate().getValue());
     }
 }

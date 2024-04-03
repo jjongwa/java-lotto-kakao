@@ -32,6 +32,9 @@ public class WinningStatistics {
 
     private Map<LottoRoundResult, Integer> generateStatistics(final List<LottoRoundResult> lottoRoundResults) {
         final EnumMap<LottoRoundResult, Integer> newStatistics = new EnumMap<>(LottoRoundResult.class);
+        for (LottoRoundResult result : LottoRoundResult.values()) {
+            newStatistics.put(result, ZERO);
+        }
         lottoRoundResults.forEach(lottoRoundResult ->
                 newStatistics.put(lottoRoundResult, newStatistics.getOrDefault(lottoRoundResult, ZERO) + ONE)
         );
@@ -52,11 +55,11 @@ public class WinningStatistics {
 
     private PurchaseMoney findPurchaseMoney() {
         return new PurchaseMoney(statistics.values().stream()
-                        .mapToInt(Integer::intValue)
-                        .sum() * LOTTO_PRICE);
+                .mapToInt(Integer::intValue)
+                .sum() * LOTTO_PRICE);
     }
 
-    public Map<LottoRoundResult, Integer> getStatistics() {
-        return statistics;
+    public int findRankCount(final LottoRoundResult lottoRoundResult) {
+        return statistics.get(lottoRoundResult);
     }
 }

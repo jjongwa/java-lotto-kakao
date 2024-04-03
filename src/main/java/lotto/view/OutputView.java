@@ -1,20 +1,18 @@
 package lotto.view;
 
-import lotto.dto.GameResultDTO;
-import lotto.dto.LottoGroupDTOs;
+import lotto.model.LottoGroup;
+import lotto.model.WinningStatistics;
+import lotto.model.vo.RevenueRate;
 
-import java.util.Map;
+import java.util.List;
+
+import static lotto.model.LottoRoundResult.*;
 
 public class OutputView {
 
     private static final String PURCHASE_COUNT_MESSAGE = "개를 구매했습니다.";
     private static final String JOIN_DELIMITER = ", ";
     private static final String GAME_RESULT_ANNOUNCE_MESSAGE = "당첨 통계\n---------";
-    private static final String FIFTH = "FIFTH";
-    private static final String FOURTH = "FOURTH";
-    private static final String THIRD = "THIRD";
-    private static final String SECOND = "SECOND";
-    private static final String FIRST = "FIRST";
     private static final String COUNT_MESSAGE = "개";
     private static final String FIFTH_MESSAGE = "3개 일 (5000)- ";
     private static final String FOURTH_MESSAGE = "4개 일 (50000)- ";
@@ -31,20 +29,22 @@ public class OutputView {
         System.out.println(purchaseCount + PURCHASE_COUNT_MESSAGE);
     }
 
-    public static void printLottoGroups(final LottoGroupDTOs lottoGroupDtos) {
-        lottoGroupDtos.getValues()
-                .forEach(lottoGroupDto -> System.out.println(String.join(JOIN_DELIMITER, lottoGroupDto.getNumbers().toString())));
+    public static void printLottoGroups2(final List<LottoGroup> lottoGroups) {
+        lottoGroups.stream()
+                .forEach(lottoGroup -> System.out.println(String.join(JOIN_DELIMITER, lottoGroup.getLottoBallNumbers().toString())));
         System.out.println();
     }
 
-    public static void printGameResult(final GameResultDTO gameResultDTO) {
-        final Map<String, Integer> statistics = gameResultDTO.getStatistics();
+    public static void printGameResult2(final WinningStatistics statistics, final RevenueRate revenueRate) {
         System.out.println(GAME_RESULT_ANNOUNCE_MESSAGE);
-        System.out.println(FIFTH_MESSAGE + statistics.get(FIFTH) + COUNT_MESSAGE);
-        System.out.println(FOURTH_MESSAGE + statistics.get(FOURTH) + COUNT_MESSAGE);
-        System.out.println(THIRD_MESSAGE + statistics.get(THIRD) + COUNT_MESSAGE);
-        System.out.println(SECOND_MESSAGE + statistics.get(SECOND) + COUNT_MESSAGE);
-        System.out.println(FIRST_MESSAGE + statistics.get(FIRST) + COUNT_MESSAGE);
-        System.out.println(TOTAL_REVENUE_MESSAGE + gameResultDTO.getRevenueRate() + RESULT_END_MESSAGE);
+        System.out.println(FIFTH_MESSAGE + statistics.findRankCount(FIFTH) + COUNT_MESSAGE);
+        System.out.println(FOURTH_MESSAGE + statistics.findRankCount(FOURTH) + COUNT_MESSAGE);
+        System.out.println(THIRD_MESSAGE + statistics.findRankCount(THIRD) + COUNT_MESSAGE);
+        System.out.println(SECOND_MESSAGE + statistics.findRankCount(SECOND) + COUNT_MESSAGE);
+        System.out.println(FIRST_MESSAGE + statistics.findRankCount(FIRST) + COUNT_MESSAGE);
+        System.out.print(TOTAL_REVENUE_MESSAGE + revenueRate.getValue());
+        if (revenueRate.isLoss()) {
+            System.out.println(RESULT_END_MESSAGE);
+        }
     }
 }
