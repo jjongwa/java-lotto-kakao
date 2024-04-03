@@ -1,5 +1,7 @@
 package lotto.model;
 
+import lotto.model.vo.WinningMoney;
+
 import java.math.BigInteger;
 import java.util.Arrays;
 
@@ -16,11 +18,11 @@ public enum LottoRoundResult {
     private static final int FIVE = 5;
     private static final int SIX = 6;
 
-    private final BigInteger price;
+    private final WinningMoney price;
     private final int rank;
 
     LottoRoundResult(final int price, int rank) {
-        this.price = BigInteger.valueOf(price);
+        this.price = new WinningMoney(BigInteger.valueOf(price));
         this.rank = rank;
     }
 
@@ -44,7 +46,7 @@ public enum LottoRoundResult {
                 .orElseThrow(IllegalArgumentException::new);
     }
 
-    public BigInteger getPrice() {
+    public WinningMoney getPrice() {
         return price;
     }
 }

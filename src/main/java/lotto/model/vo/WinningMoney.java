@@ -5,8 +5,10 @@ import java.util.Objects;
 
 public class WinningMoney {
 
-    private static final int ZERO = 0;
+    private static final int ZERO_NUMBER = 0;
     public static final String INVALID_AMOUNT_MESSAGE = "당첨금은 음수일 수 없습니다.";
+
+    public static final WinningMoney ZERO = new WinningMoney(BigInteger.ZERO);
 
     private final BigInteger amount;
 
@@ -21,8 +23,20 @@ public class WinningMoney {
         }
     }
 
+    public WinningMoney add(final WinningMoney otherWinningMoney) {
+        return new WinningMoney(amount.add(otherWinningMoney.amount));
+    }
+
+    public WinningMoney multiply(final int value) {
+        return new WinningMoney(amount.multiply(BigInteger.valueOf(value)));
+    }
+
     private boolean isNegativeAmount(final BigInteger amount) {
-        return amount.compareTo(BigInteger.ZERO) < ZERO;
+        return amount.compareTo(BigInteger.ZERO) < ZERO_NUMBER;
+    }
+
+    public BigInteger getAmount() {
+        return amount;
     }
 
     @Override
