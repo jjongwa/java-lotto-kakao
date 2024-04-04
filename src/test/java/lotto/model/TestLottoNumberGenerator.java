@@ -7,12 +7,12 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.stream.Collectors;
 
-public class CustomLottoMachine implements LottoMachine {
+public class TestLottoNumberGenerator implements LottoNumberSelector {
 
     private final LinkedList<LottoGroup> lottoGroups;
 
     @SafeVarargs
-    public CustomLottoMachine(final List<Integer>... groupNumbers) {
+    public TestLottoNumberGenerator(final List<Integer>... groupNumbers) {
         this.lottoGroups = new LinkedList<>(Arrays.stream(groupNumbers)
                 .map(numbers -> new LottoGroup(numbers.stream()
                         .map(LottoBall::new)
@@ -22,7 +22,7 @@ public class CustomLottoMachine implements LottoMachine {
     }
 
     @Override
-    public LottoGroup generate() {
+    public LottoGroup generate(final List<LottoBall> lottoBalls) {
         return lottoGroups.remove();
     }
 }

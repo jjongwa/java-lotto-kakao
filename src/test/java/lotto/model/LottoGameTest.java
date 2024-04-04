@@ -18,7 +18,8 @@ class LottoGameTest {
     @ValueSource(ints = {1, 2, 3, 4, 10, 15})
     void 로또_그룹을_가지고_있다(final int purchaseNumber) {
         // given
-        final LottoGame lottoGame = new LottoGame(new PurchaseCount(purchaseNumber), new RandomLottoMachine());
+        final RandomLottoNumberSelector randomLottoNumberSelector = new RandomLottoNumberSelector();
+        final LottoGame lottoGame = new LottoGame(new PurchaseCount(purchaseNumber), new LottoMachine(randomLottoNumberSelector));
 
         // when & then
         assertThat(lottoGame.getLottoGroups()).hasSize(purchaseNumber);
@@ -27,9 +28,10 @@ class LottoGameTest {
     @Test
     void 당첨_그룹을_받아_당첨_통계를_반환할_수_있다() {
         // given
+        final TestLottoNumberGenerator testLottoNumberGenerator = new TestLottoNumberGenerator(List.of(1, 2, 3, 4, 5, 6), List.of(7, 8, 9, 10, 11, 12));
         final LottoGame lottoGame = new LottoGame(
                 new PurchaseCount(2),
-                new CustomLottoMachine(List.of(1, 2, 3, 4, 5, 6), List.of(7, 8, 9, 10, 11, 12))
+                new LottoMachine(testLottoNumberGenerator)
         );
         final WinningGroup winningGroup = new WinningGroup("1, 2, 3, 4, 5, 6", 7);
         final WinningStatistics expectedStatistics = new WinningStatistics(List.of(FIRST, BOOM));

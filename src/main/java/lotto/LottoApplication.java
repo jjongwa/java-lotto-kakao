@@ -1,9 +1,6 @@
 package lotto;
 
-import lotto.model.LottoGame;
-import lotto.model.RandomLottoMachine;
-import lotto.model.WinningGroup;
-import lotto.model.WinningStatistics;
+import lotto.model.*;
 import lotto.model.vo.PurchaseCount;
 import lotto.model.vo.PurchaseMoney;
 import lotto.view.InputView;
@@ -15,7 +12,7 @@ public class LottoApplication {
         final PurchaseCount purchaseCount = makePurchaseCount();
         OutputView.printPurchaseCount(purchaseCount.getCount());
 
-        final LottoGame lottoGame = new LottoGame(purchaseCount, new RandomLottoMachine());
+        final LottoGame lottoGame = new LottoGame(purchaseCount, new LottoMachine(new RandomLottoNumberSelector()));
         OutputView.printLottoGroups2(lottoGame.getLottoGroups());
 
         final WinningGroup winningGroup = makeWinningGroup();

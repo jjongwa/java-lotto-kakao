@@ -11,7 +11,7 @@ public class LottoGame {
     private final List<LottoGroup> lottoGroups;
 
     public LottoGame(final PurchaseCount purchaseCount, final LottoMachine lottoMachine) {
-        this.lottoGroups = Stream.generate(lottoMachine::generate)
+        this.lottoGroups = Stream.generate(lottoMachine::randomGenerate)
                 .limit(purchaseCount.getCount())
                 .collect(Collectors.toUnmodifiableList());
     }
