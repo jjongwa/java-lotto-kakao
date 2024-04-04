@@ -6,24 +6,28 @@ import lotto.model.vo.PurchaseMoney;
 import lotto.view.InputView;
 import lotto.view.OutputView;
 
+import java.util.List;
+
 public class LottoApplication {
 
     public static void main(String[] args) {
-        final PurchaseCount purchaseCount = makePurchaseCount();
-        OutputView.printPurchaseCount(purchaseCount.getCount());
+        final PurchaseCounts purchaseCounts = makePurchaseCounts();
 
-        final LottoGame lottoGame = new LottoGame(purchaseCount, new LottoMachine(new RandomLottoNumberSelector()));
-        OutputView.printLottoGroups2(lottoGame.getLottoGroups());
+        final List<String> manualLottoNumbersInput = InputView.readManualLottoNumbers(purchaseCounts.getManualPurchaseCount());
+        final LottoGame lottoGame = new LottoGame(purchaseCounts, manualLottoNumbersInput, new LottoMachine(new RandomLottoNumberSelector()));
+        OutputView.printPurchaseCount(purchaseCounts);
+        OutputView.printLottoGroups(lottoGame.getLottoGroups());
 
         final WinningGroup winningGroup = makeWinningGroup();
 
         final WinningStatistics winningStatistics = lottoGame.makeResult(winningGroup);
-        OutputView.printGameResult2(winningStatistics, winningStatistics.calculateRevenueRate());
+        OutputView.printGameResult(winningStatistics, winningStatistics.calculateRevenueRate());
     }
 
-    private static PurchaseCount makePurchaseCount() {
+    private static PurchaseCounts makePurchaseCounts() {
         final int purchaseMoneyInput = InputView.readPurchaseMoney();
-        return new PurchaseMoney(purchaseMoneyInput).toPurchaseCount();
+        final int manualPurchaseCountInput = InputView.readManualPurchaseCount();
+        return new PurchaseCounts(new PurchaseMoney(purchaseMoneyInput), new PurchaseCount(manualPurchaseCountInput));
     }
 
     private static WinningGroup makeWinningGroup() {

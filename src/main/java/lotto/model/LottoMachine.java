@@ -30,7 +30,7 @@ public class LottoMachine {
     public LottoGroup manualGenerate(final List<Integer> numbers) {
         return new LottoGroup(LOTTO_NUMBERS.stream()
                 .filter(getLottoBallPredicate(numbers))
-                .collect(Collectors.toList())
+                .collect(Collectors.toUnmodifiableList())
         );
     }
 

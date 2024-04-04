@@ -1,6 +1,7 @@
 package lotto.view;
 
 import lotto.model.LottoGroup;
+import lotto.model.PurchaseCounts;
 import lotto.model.WinningStatistics;
 import lotto.model.vo.RevenueRate;
 
@@ -23,21 +24,24 @@ public class OutputView {
     private static final String TOTAL_REVENUE_MESSAGE = "총 수익률은 ";
     private static final String FIRST_MESSAGE = "6개 일치 (2000000000원)- ";
     private static final String RESULT_END_MESSAGE = "입니다.(기준이 1이기 때문에 결과적으로 손해라는 의미임)";
+    private static final String PURCHASE_COUNT_RESULT = "%s%d%s%d%s";
+    private static final String MANUAL_MESSAGE = "수동으로 ";
+    private static final String RANDOM_MESSAGE = "장, 자동으로 ";
 
     private OutputView() {
     }
 
-    public static void printPurchaseCount(final int purchaseCount) {
-        System.out.println(purchaseCount + PURCHASE_COUNT_MESSAGE);
+    public static void printPurchaseCount(final PurchaseCounts purchaseCounts) {
+        System.out.println(String.format(PURCHASE_COUNT_RESULT, MANUAL_MESSAGE, purchaseCounts.getManualPurchaseCount(), RANDOM_MESSAGE, purchaseCounts.getRandomPurchaseCount(), PURCHASE_COUNT_MESSAGE));
     }
 
-    public static void printLottoGroups2(final List<LottoGroup> lottoGroups) {
+    public static void printLottoGroups(final List<LottoGroup> lottoGroups) {
         lottoGroups.stream()
                 .forEach(lottoGroup -> System.out.println(String.join(JOIN_DELIMITER, lottoGroup.getLottoBallNumbers().toString())));
         System.out.println();
     }
 
-    public static void printGameResult2(final WinningStatistics statistics, final RevenueRate revenueRate) {
+    public static void printGameResult(final WinningStatistics statistics, final RevenueRate revenueRate) {
         System.out.println(GAME_RESULT_ANNOUNCE_MESSAGE);
         System.out.printf(RANK_RESULT_FORMAT, FIFTH_MESSAGE, statistics.findRankCount(FIFTH), COUNT_MESSAGE);
         System.out.printf(RANK_RESULT_FORMAT, FOURTH_MESSAGE, statistics.findRankCount(FOURTH), COUNT_MESSAGE);

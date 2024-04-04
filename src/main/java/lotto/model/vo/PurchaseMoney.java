@@ -25,6 +25,10 @@ public class PurchaseMoney {
         }
     }
 
+    public PurchaseCount subtractByManualCount(final PurchaseCount manulPurchaseCount) {
+        return toPurchaseCount().subtract(manulPurchaseCount);
+    }
+
     public PurchaseCount toPurchaseCount() {
         return new PurchaseCount(this.amount / SINGLE_LOTTO_COST);
     }

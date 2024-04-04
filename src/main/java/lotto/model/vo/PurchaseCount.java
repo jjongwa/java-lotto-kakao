@@ -15,9 +15,13 @@ public class PurchaseCount {
     }
 
     private void validateCount(final int count) {
-        if (count <= ZERO) {
+        if (count < ZERO) {
             throw new IllegalArgumentException(INVALID_COUNT_MESSAGE);
         }
+    }
+
+    public PurchaseCount subtract(final PurchaseCount otherCount) {
+        return new PurchaseCount(count - otherCount.count);
     }
 
     public int getCount() {

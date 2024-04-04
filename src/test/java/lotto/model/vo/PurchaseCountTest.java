@@ -16,7 +16,7 @@ class PurchaseCountTest {
     }
 
     @ParameterizedTest(name = "개수가 {0}일 때")
-    @ValueSource(ints = {0, -1, -20, -100, -1000})
+    @ValueSource(ints = {-1, -20, -100, -1000})
     void 구입_개수가_자연수가_아니면_예외_처리한다(final int count) {
         assertThatThrownBy(() -> new PurchaseCount(count))
                 .isInstanceOf(IllegalArgumentException.class)

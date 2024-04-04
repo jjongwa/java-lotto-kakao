@@ -1,6 +1,7 @@
 package lotto.model;
 
 import lotto.model.vo.PurchaseCount;
+import lotto.model.vo.PurchaseMoney;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
@@ -19,7 +20,11 @@ class LottoGameTest {
     void 로또_그룹을_가지고_있다(final int purchaseNumber) {
         // given
         final RandomLottoNumberSelector randomLottoNumberSelector = new RandomLottoNumberSelector();
-        final LottoGame lottoGame = new LottoGame(new PurchaseCount(purchaseNumber), new LottoMachine(randomLottoNumberSelector));
+        final LottoGame lottoGame = new LottoGame(
+                new PurchaseCounts(new PurchaseMoney(purchaseNumber * 1000), new PurchaseCount(0)),
+                List.of(""),
+                new LottoMachine(randomLottoNumberSelector)
+        );
 
         // when & then
         assertThat(lottoGame.getLottoGroups()).hasSize(purchaseNumber);
@@ -30,7 +35,8 @@ class LottoGameTest {
         // given
         final TestLottoNumberGenerator testLottoNumberGenerator = new TestLottoNumberGenerator(List.of(1, 2, 3, 4, 5, 6), List.of(7, 8, 9, 10, 11, 12));
         final LottoGame lottoGame = new LottoGame(
-                new PurchaseCount(2),
+                new PurchaseCounts(new PurchaseMoney(2000), new PurchaseCount(0)),
+                List.of(""),
                 new LottoMachine(testLottoNumberGenerator)
         );
         final WinningGroup winningGroup = new WinningGroup("1, 2, 3, 4, 5, 6", 7);
