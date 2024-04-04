@@ -46,7 +46,7 @@ public enum LottoRoundResult {
                 .orElseThrow(IllegalArgumentException::new);
     }
 
-    public WinningMoney getPrice() {
-        return price;
+    public WinningMoney calculateWinningMoneyByRank(final int count) {
+        return price.multiply(count);
     }
 }

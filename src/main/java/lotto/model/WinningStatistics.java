@@ -50,7 +50,7 @@ public class WinningStatistics {
 
     private WinningMoney calculateTotalPrice() {
         return statistics.entrySet().stream()
-                .map(entry -> entry.getKey().getPrice().multiply(entry.getValue()))
+                .map(entry -> entry.getKey().calculateWinningMoneyByRank(entry.getValue()))
                 .reduce(WinningMoney.ZERO, WinningMoney::add);
     }
 
