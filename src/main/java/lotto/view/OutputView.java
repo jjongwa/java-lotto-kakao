@@ -1,11 +1,9 @@
 package lotto.view;
 
-import lotto.model.LottoGroup;
+import lotto.model.LottoGame;
 import lotto.model.PurchaseCounts;
 import lotto.model.WinningStatistics;
 import lotto.model.vo.RevenueRate;
-
-import java.util.List;
 
 import static lotto.model.LottoRoundResult.*;
 
@@ -31,12 +29,9 @@ public class OutputView {
     private OutputView() {
     }
 
-    public static void printPurchaseCount(final PurchaseCounts purchaseCounts) {
+    public static void printPurchaseStatus(final PurchaseCounts purchaseCounts, final LottoGame lottoGame) {
         System.out.println(String.format(PURCHASE_COUNT_RESULT, MANUAL_MESSAGE, purchaseCounts.getManualPurchaseCount(), RANDOM_MESSAGE, purchaseCounts.getRandomPurchaseCount(), PURCHASE_COUNT_MESSAGE));
-    }
-
-    public static void printLottoGroups(final List<LottoGroup> lottoGroups) {
-        lottoGroups.stream()
+        lottoGame.getLottoGroups()
                 .forEach(lottoGroup -> System.out.println(String.join(JOIN_DELIMITER, lottoGroup.getLottoBallNumbers().toString())));
         System.out.println();
     }
