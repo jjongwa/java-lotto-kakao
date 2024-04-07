@@ -19,11 +19,11 @@ class LottoGameTest {
     @ValueSource(ints = {1, 2, 3, 4, 10, 15})
     void 로또_그룹을_가지고_있다(final int purchaseNumber) {
         // given
-        final RandomLottoNumberSelector randomLottoNumberSelector = new RandomLottoNumberSelector();
+        final ProductionLottoNumberSelector productionLottoNumberSelector = new ProductionLottoNumberSelector();
         final LottoGame lottoGame = new LottoGame(
                 new PurchaseCounts(new PurchaseMoney(purchaseNumber * 1000), new PurchaseCount(0)),
                 List.of(""),
-                new LottoMachine(randomLottoNumberSelector)
+                new LottoMachine(productionLottoNumberSelector)
         );
 
         // when & then

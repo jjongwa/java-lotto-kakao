@@ -1,7 +1,6 @@
 package lotto.model;
 
 import lotto.model.vo.LottoBall;
-import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.Test;
 
 import static java.util.List.of;
@@ -13,7 +12,7 @@ class LottoMachineTest {
     @Test
     void 수동으로_로또_그룹을_생성할_수_있다() {
         // given
-        final LottoMachine lottoMachine = new LottoMachine(new RandomLottoNumberSelector());
+        final LottoMachine lottoMachine = new LottoMachine(new ProductionLottoNumberSelector());
         final LottoGroup expected = new LottoGroup(of(
                 new LottoBall(1),
                 new LottoBall(2),

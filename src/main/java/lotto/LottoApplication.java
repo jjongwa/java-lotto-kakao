@@ -14,7 +14,7 @@ public class LottoApplication {
         final PurchaseCounts purchaseCounts = makePurchaseCounts();
 
         final List<String> manualLottoNumbersInput = InputView.readManualLottoNumbers(purchaseCounts.getManualPurchaseCount());
-        final LottoGame lottoGame = new LottoGame(purchaseCounts, manualLottoNumbersInput, new LottoMachine(new RandomLottoNumberSelector()));
+        final LottoGame lottoGame = new LottoGame(purchaseCounts, manualLottoNumbersInput, new LottoMachine(new ProductionLottoNumberSelector()));
         OutputView.printPurchaseStatus(purchaseCounts, lottoGame);
 
         final WinningGroup winningGroup = makeWinningGroup();
