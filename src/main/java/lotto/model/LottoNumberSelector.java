@@ -4,9 +4,8 @@ import lotto.model.vo.LottoBall;
 
 import java.util.List;
 
+@FunctionalInterface
 public interface LottoNumberSelector {
 
-    LottoGroup randomSelect(final List<LottoBall> lottoBalls);
-
-    LottoGroup customSelect(final List<LottoBall> lottoBalls, final List<Integer>numbers);
+    LottoGroup select(final List<LottoBall> lottoBalls);
 }

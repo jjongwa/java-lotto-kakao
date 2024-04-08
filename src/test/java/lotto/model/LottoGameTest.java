@@ -19,11 +19,10 @@ class LottoGameTest {
     @ValueSource(ints = {1, 2, 3, 4, 10, 15})
     void 로또_그룹을_가지고_있다(final int purchaseNumber) {
         // given
-        final ProductionLottoNumberSelector productionLottoNumberSelector = new ProductionLottoNumberSelector();
+        final RandomLottoNumberSelector randomLottoNumberSelector = new RandomLottoNumberSelector();
         final LottoGame lottoGame = new LottoGame(
                 new PurchaseCounts(new PurchaseMoney(purchaseNumber * 1000), new PurchaseCount(0)),
-                List.of(""),
-                new LottoMachine(productionLottoNumberSelector)
+                new LottoMachine(randomLottoNumberSelector, randomLottoNumberSelector)
         );
 
         // when & then
@@ -36,8 +35,7 @@ class LottoGameTest {
         final TestLottoNumberGenerator testLottoNumberGenerator = new TestLottoNumberGenerator(List.of(1, 2, 3, 4, 5, 6), List.of(7, 8, 9, 10, 11, 12));
         final LottoGame lottoGame = new LottoGame(
                 new PurchaseCounts(new PurchaseMoney(2000), new PurchaseCount(0)),
-                List.of(""),
-                new LottoMachine(testLottoNumberGenerator)
+                new LottoMachine(testLottoNumberGenerator, testLottoNumberGenerator)
         );
         final WinningGroup winningGroup = new WinningGroup("1, 2, 3, 4, 5, 6", 7);
         final WinningStatistics expectedStatistics = new WinningStatistics(List.of(FIRST, BOOM));

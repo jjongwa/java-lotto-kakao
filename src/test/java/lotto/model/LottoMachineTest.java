@@ -1,10 +1,11 @@
 package lotto.model;
 
-import lotto.model.vo.LottoBall;
 import org.junit.jupiter.api.Test;
 
-import static java.util.List.of;
+import java.util.List;
+
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.junit.jupiter.api.Assertions.assertAll;
 
 @SuppressWarnings("NonAsciiCharacters")
 class LottoMachineTest {
@@ -12,20 +13,19 @@ class LottoMachineTest {
     @Test
     void 수동으로_로또_그룹을_생성할_수_있다() {
         // given
-        final LottoMachine lottoMachine = new LottoMachine(new ProductionLottoNumberSelector());
-        final LottoGroup expected = new LottoGroup(of(
-                new LottoBall(1),
-                new LottoBall(2),
-                new LottoBall(3),
-                new LottoBall(4),
-                new LottoBall(5),
-                new LottoBall(6)
-        ));
+        final LottoMachine lottoMachine = new LottoMachine(new RandomLottoNumberSelector(), new CustomLottoNumberSelector(List.of("1,2,3,4,5,6")));
 
         // when
-        final LottoGroup actual = lottoMachine.manualGenerate(of(1, 2, 3, 4, 5, 6));
+        final List<Integer> lottoBallNumbers = lottoMachine.manualGenerate().getLottoBallNumbers();
 
         // then
-        assertThat(actual).usingRecursiveComparison().isEqualTo(expected);
+        assertAll(
+                () -> assertThat(lottoBallNumbers).contains(1),
+                () -> assertThat(lottoBallNumbers).contains(2),
+                () -> assertThat(lottoBallNumbers).contains(3),
+                () -> assertThat(lottoBallNumbers).contains(4),
+                () -> assertThat(lottoBallNumbers).contains(5),
+                () -> assertThat(lottoBallNumbers).contains(6)
+        );
     }
 }

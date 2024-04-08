@@ -20,17 +20,20 @@ public class LottoMachine {
                 .collect(Collectors.toList());
     }
 
-    private final LottoNumberSelector lottoNumberSelector;
+    private final LottoNumberSelector randomLottoNumberSelector;
+    private final LottoNumberSelector customLottoNumberSelector;
 
-    public LottoMachine(final LottoNumberSelector lottoNumberSelector) {
-        this.lottoNumberSelector = lottoNumberSelector;
+
+    public LottoMachine(final LottoNumberSelector randomLottoNumberSelector, final LottoNumberSelector customLottoNumberSelector) {
+        this.randomLottoNumberSelector = randomLottoNumberSelector;
+        this.customLottoNumberSelector = customLottoNumberSelector;
     }
 
     public LottoGroup randomGenerate() {
-        return lottoNumberSelector.randomSelect(LOTTO_NUMBERS);
+        return randomLottoNumberSelector.select(LOTTO_NUMBERS);
     }
 
-    public LottoGroup manualGenerate(final List<Integer> numbers) {
-        return lottoNumberSelector.customSelect(LOTTO_NUMBERS, numbers);
+    public LottoGroup manualGenerate() {
+        return customLottoNumberSelector.select(LOTTO_NUMBERS);
     }
 }
