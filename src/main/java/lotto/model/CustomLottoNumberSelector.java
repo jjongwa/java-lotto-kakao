@@ -2,47 +2,32 @@ package lotto.model;
 
 import lotto.model.vo.LottoBall;
 
-import java.util.Arrays;
 import java.util.LinkedList;
 import java.util.List;
-import java.util.function.Function;
-import java.util.function.Predicate;
 import java.util.stream.Collectors;
 
 public class CustomLottoNumberSelector implements LottoNumberSelector {
 
     private static final String SPLIT_REGEX = ",";
 
-    private final LinkedList<List<Integer>> lottoNumbers;
+    private final LinkedList<ManualLottoNumbers> manualLottoNumberGroups;
 
     public CustomLottoNumberSelector(final List<String> manualLottoNumbersInput) {
-        this.lottoNumbers = new LinkedList<>(manualLottoNumbersInput.stream()
+        this.manualLottoNumberGroups = new LinkedList<>(manualLottoNumbersInput.stream()
                 .map(input -> input.split(SPLIT_REGEX))
-                .map(convertToNumbers())
+                .map(ManualLottoNumbers::new)
                 .collect(Collectors.toUnmodifiableList()));
-    }
-
-    private Function<String[], List<Integer>> convertToNumbers() {
-        return numbers -> Arrays.stream(numbers)
-                .map(String::trim)
-                .map(Integer::parseInt)
-                .collect(Collectors.toUnmodifiableList());
     }
 
     @Override
     public LottoGroup select(final List<LottoBall> lottoBalls) {
-        return manualGenerate(lottoBalls, lottoNumbers.remove());
+        return manualGenerate(lottoBalls, manualLottoNumberGroups.remove());
     }
 
-    public LottoGroup manualGenerate(final List<LottoBall> lottoBalls, final List<Integer> numbers) {
+    private LottoGroup manualGenerate(final List<LottoBall> lottoBalls, final ManualLottoNumbers numbers) {
         return new LottoGroup(lottoBalls.stream()
-                .filter(getLottoBallPredicate(numbers))
+                .filter(numbers.getLottoBallPredicate())
                 .collect(Collectors.toUnmodifiableList())
         );
-    }
-
-    private Predicate<LottoBall> getLottoBallPredicate(final List<Integer> numbers) {
-        return lottoBall -> numbers.stream()
-                .anyMatch(lottoBall::hasNumber);
     }
 }
